@@ -1,0 +1,1 @@
+![Servit](./docs/images/logo.png)
