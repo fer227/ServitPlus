@@ -35,13 +35,37 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appbar"
+            app:tabMode="fixed"
+            app:tabIndicatorColor="@color/white"
+            app:tabTextColor="@color/colorPrimaryVariant"
+            app:tabSelectedTextColor="@color/white"
+            app:tabIconTint="@color/colorselector"
+            style="@style/Widget.MaterialComponents.TabLayout.PrimarySurface"
             android:background="@color/colorPrimary"
-            app:tabInlineLabel="true"
-            app:tabTextColor="@color/white"
-            app:tabSelectedTextColor="@color/colorPrimaryVariant"
-            app:tabTextAppearance="@style/TextAppearance.AppCompat.Small"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appbar">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Carta"
+                android:icon="@drawable/carta"
+                />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Carrito"
+                android:icon="@drawable/carrito"
+                />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cuenta"
+                android:icon="@drawable/cuenta"
+                />
+        </com.google.android.material.tabs.TabLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
