@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     TabItem tab_carta;
     TabItem tab_carrito;
     TabItem tab_cuenta;
+    ViewPager2 viewPager2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tabLayout = findViewById(R.id.tab_layout);
+        viewPager2 = findViewById(R.id.viewpager);
         tab_carta = findViewById(R.id.tab_carta);
         tab_carrito = findViewById(R.id.tab_carrito);
         tab_cuenta = findViewById(R.id.tab_cuenta);
