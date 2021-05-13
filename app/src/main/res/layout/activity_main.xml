@@ -48,6 +48,7 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/tab_carta"
                 android:text="Carta"
                 android:icon="@drawable/carta"
                 />
@@ -55,6 +56,7 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/tab_carrito"
                 android:text="Carrito"
                 android:icon="@drawable/carrito"
                 />
@@ -62,6 +64,7 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/tab_cuenta"
                 android:text="Cuenta"
                 android:icon="@drawable/cuenta"
                 />
@@ -69,11 +72,10 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
+    <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbar" />
+    
 </androidx.constraintlayout.widget.ConstraintLayout>
