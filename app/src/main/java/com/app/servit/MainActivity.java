@@ -18,15 +18,13 @@ import android.text.style.ImageSpan;
 
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
-    TabItem tab_carta;
-    TabItem tab_carrito;
-    TabItem tab_cuenta;
     ViewPager2 viewPager2;
 
     @Override
@@ -36,10 +34,35 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.tab_layout);
         viewPager2 = findViewById(R.id.viewpager);
-        tab_carta = findViewById(R.id.tab_carta);
-        tab_carrito = findViewById(R.id.tab_carrito);
-        tab_cuenta = findViewById(R.id.tab_cuenta);
+        viewPager2.setAdapter(new PageAdapter(getSupportFragmentManager(), getLifecycle()));
 
+        tabLayout.addTab(tabLayout.newTab().setText("Carta").setIcon(R.drawable.carta));
+        tabLayout.addTab(tabLayout.newTab().setText("Carrito").setIcon(R.drawable.carrito));
+        tabLayout.addTab(tabLayout.newTab().setText("Cuenta").setIcon(R.drawable.cuenta));
 
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager2.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                tabLayout.selectTab(tabLayout.getTabAt(position));
+            }
+        });
     }
 }
