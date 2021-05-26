@@ -68,7 +68,7 @@ public class CartaFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        
+
         RetrofitService.getInstance().getCategorias().enqueue(new Callback<List<Categoria>>() {
             @Override
             public void onResponse(Call<List<Categoria>> call, Response<List<Categoria>> response) {
