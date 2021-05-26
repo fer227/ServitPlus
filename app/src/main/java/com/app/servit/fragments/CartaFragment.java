@@ -2,11 +2,15 @@ package com.app.servit.fragments;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.app.servit.R;
+import com.app.servit.adaptadores.ListAdapterCategorias;
 import com.app.servit.api.RetrofitService;
 import com.app.servit.modelos.Categoria;
 import com.app.servit.utils.Utils;
@@ -37,6 +41,7 @@ public class CartaFragment extends Fragment {
     private String mParam2;
 
     private List<Categoria> categorias = new ArrayList();
+    static ListAdapterCategorias adapterCategorias;
 
     /**
      * Use this factory method to create a new instance of
@@ -74,7 +79,10 @@ public class CartaFragment extends Fragment {
             public void onResponse(Call<List<Categoria>> call, Response<List<Categoria>> response) {
                 categorias.clear();
 
-                categorias = response.body();
+                //categorias = response.body();
+                categorias.addAll(response.body());
+                System.out.println(categorias);
+                adapterCategorias.notifyDataSetChanged();
                 Utils.enviarToast("Categorías recibidas", getContext());
             }
 
@@ -90,6 +98,13 @@ public class CartaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_carta, container, false);
+        View view = inflater.inflate(R.layout.fragment_carta, container, false);
+        categorias.add(new Categoria("flksdmfklsd", "una cat"));
+        adapterCategorias = new ListAdapterCategorias(categorias, getContext());
+        RecyclerView recyclerView = view.findViewById(R.id.lista_categorias);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapterCategorias);
+        return view;
     }
 }

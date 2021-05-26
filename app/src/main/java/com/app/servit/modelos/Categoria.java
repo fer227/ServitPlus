@@ -12,9 +12,13 @@ public class Categoria {
     @Expose
     private String nombre;
 
-    public Categoria(String id, String nombre, String v) {
+    public Categoria(String id, String nombre) {
         this.id = id;
         this.nombre = nombre;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     @Override

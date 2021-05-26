@@ -5,10 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".fragments.CartaFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="Hola desde la carta" />
+        android:layout_marginTop="10dp"
+        android:baselineAligned="false"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/lista_categorias"/>
 
 </FrameLayout>
