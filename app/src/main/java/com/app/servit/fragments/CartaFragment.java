@@ -79,9 +79,7 @@ public class CartaFragment extends Fragment {
             public void onResponse(Call<List<Categoria>> call, Response<List<Categoria>> response) {
                 categorias.clear();
 
-                //categorias = response.body();
                 categorias.addAll(response.body());
-                System.out.println(categorias);
                 adapterCategorias.notifyDataSetChanged();
                 Utils.enviarToast("Categorías recibidas", getContext());
             }
@@ -99,7 +97,6 @@ public class CartaFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_carta, container, false);
-        categorias.add(new Categoria("flksdmfklsd", "una cat"));
         adapterCategorias = new ListAdapterCategorias(categorias, getContext());
         RecyclerView recyclerView = view.findViewById(R.id.lista_categorias);
         recyclerView.setHasFixedSize(true);
