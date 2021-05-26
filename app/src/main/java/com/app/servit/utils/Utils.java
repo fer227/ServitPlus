@@ -5,7 +5,7 @@ import android.widget.Toast;
 
 public class Utils {
     public static String getUrlBase(){
-        return "http://161.35.220.138:6000";
+        return "http://161.35.220.138:6000/";
     }
 
     public static void enviarToast(String msg, Context context){
