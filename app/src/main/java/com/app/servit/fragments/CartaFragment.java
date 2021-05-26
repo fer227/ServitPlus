@@ -7,6 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.app.servit.R;
+import com.app.servit.api.RetrofitService;
+import com.app.servit.modelos.Categoria;
+import com.app.servit.utils.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +35,8 @@ public class CartaFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private List<Categoria> categorias = new ArrayList();
 
     /**
      * Use this factory method to create a new instance of
@@ -55,7 +68,22 @@ public class CartaFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        
+        RetrofitService.getInstance().getCategorias().enqueue(new Callback<List<Categoria>>() {
+            @Override
+            public void onResponse(Call<List<Categoria>> call, Response<List<Categoria>> response) {
+                categorias.clear();
 
+                categorias = response.body();
+                Utils.enviarToast("Categorías recibidas", getContext());
+            }
+
+            @Override
+            public void onFailure(Call<List<Categoria>> call, Throwable t) {
+                Utils.enviarToast("Error al intentar recibir la carta", getContext());
+                System.out.println(t.toString());
+            }
+        });
     }
 
     @Override
