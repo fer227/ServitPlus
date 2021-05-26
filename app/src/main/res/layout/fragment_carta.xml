@@ -5,13 +5,18 @@
     android:layout_height="match_parent"
     tools:context=".fragments.CartaFragment">
 
+    <include
+        android:id="@+id/include_categorias"
+        android:visibility="visible"
+        layout="@layout/list_categorias">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:baselineAligned="false"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/lista_categorias"/>
+    </include>
+
+    <include
+        android:id="@+id/include_productos"
+        android:visibility="gone"
+        layout="@layout/list_productos">
+
+    </include>
 
 </FrameLayout>

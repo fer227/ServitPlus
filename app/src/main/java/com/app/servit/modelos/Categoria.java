@@ -21,6 +21,8 @@ public class Categoria {
         return nombre;
     }
 
+    public String getId() { return id; }
+
     @Override
     public String toString() {
         return "Categoria{" +

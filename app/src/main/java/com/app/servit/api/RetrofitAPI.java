@@ -14,6 +14,6 @@ public interface RetrofitAPI {
     @GET("/categorias")
     Call<List<Categoria>> getCategorias();
 
-    @GET("/canciones/{id}")
-    Call<List<Producto>> getProductosByCategoria(@Path("id") int id);
+    @GET("/productos/{id}")
+    Call<List<Producto>> getProductosByCategoria(@Path("id") String id);
 }

@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 
 import com.app.servit.R;
 import com.app.servit.adaptadores.ListAdapterCategorias;
+import com.app.servit.adaptadores.ListAdapterProductos;
 import com.app.servit.api.RetrofitService;
 import com.app.servit.modelos.Categoria;
+import com.app.servit.modelos.Producto;
 import com.app.servit.utils.Utils;
 
 import java.util.ArrayList;
@@ -41,7 +43,9 @@ public class CartaFragment extends Fragment {
     private String mParam2;
 
     private List<Categoria> categorias = new ArrayList();
+    private List<Producto> productos = new ArrayList();
     static ListAdapterCategorias adapterCategorias;
+    static ListAdapterProductos adapterProductos;
 
     /**
      * Use this factory method to create a new instance of
@@ -92,16 +96,45 @@ public class CartaFragment extends Fragment {
         });
     }
 
+    public void getProductos(String id) {
+        System.out.println("--------------------");
+        RetrofitService.getInstance().getProductosByCategoria(id).enqueue(new Callback<List<Producto>>() {
+            @Override
+            public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
+                productos.clear();
+                System.out.println(response.body());
+                productos.addAll(response.body());
+                adapterProductos.notifyDataSetChanged();
+                System.out.println(productos);
+                Utils.enviarToast("Productos recibidos recibidas", getContext());
+            }
+
+            @Override
+            public void onFailure(Call<List<Producto>> call, Throwable t) {
+                Utils.enviarToast("Error al intentar recibir los productos", getContext());
+                System.out.println(t.toString());
+            }
+        });
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_carta, container, false);
-        adapterCategorias = new ListAdapterCategorias(categorias, getContext());
-        RecyclerView recyclerView = view.findViewById(R.id.lista_categorias);
+
+        adapterCategorias = new ListAdapterCategorias(categorias, this, getContext());
+        RecyclerView recyclerView = view.findViewById(R.id.include_categorias);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapterCategorias);
+
+        adapterProductos = new ListAdapterProductos(productos, getContext());
+        RecyclerView recyclerView2 = view.findViewById(R.id.include_productos);
+        recyclerView2.setHasFixedSize(true);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView2.setAdapter(adapterProductos);
+
         return view;
     }
 }

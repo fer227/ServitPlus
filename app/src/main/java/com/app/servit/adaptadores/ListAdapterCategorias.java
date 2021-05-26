@@ -1,5 +1,6 @@
 package com.app.servit.adaptadores;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -8,10 +9,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.servit.R;
+import com.app.servit.fragments.CartaFragment;
 import com.app.servit.modelos.Categoria;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -20,17 +23,16 @@ import java.util.List;
 public class ListAdapterCategorias extends RecyclerView.Adapter<ListAdapterCategorias.ViewHolder>{
     private List<Categoria> datos;
     private LayoutInflater inflador;
-    private Context context;
+    private CartaFragment fragment;
 
-    public ListAdapterCategorias(List<Categoria> elementos, Context context){
+    public ListAdapterCategorias(List<Categoria> elementos, CartaFragment fragment, Context context){
         this.inflador = LayoutInflater.from(context);
-        this.context = context;
+        this.fragment = fragment;
         this.datos = elementos;
     }
 
     @Override
     public int getItemCount(){
-        System.out.println("GETITEMCOUNT" +datos.size());
         return datos.size(); }
 
     @Override
@@ -44,13 +46,17 @@ public class ListAdapterCategorias extends RecyclerView.Adapter<ListAdapterCateg
         holder.bindData(datos.get(position));
         holder.categoria.setText(datos.get(position).getNombre());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //System.out.println(datos.get(position).toString());
                 //Intent intent = new Intent(context, Detalle.class);
                 //intent.putExtra("id", datos.get(position).getId());
                 //context.startActivity(intent);
+                System.out.println("----------");
+                String id = datos.get(position).getId();
+                System.out.println(id);
+                fragment.getProductos(id);
             }
         });
     }
