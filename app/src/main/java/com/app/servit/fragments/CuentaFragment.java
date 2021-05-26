@@ -1,4 +1,4 @@
-package com.app.servit;
+package com.app.servit.fragments;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -6,13 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.app.servit.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CarritoFragment#newInstance} factory method to
+ * Use the {@link CuentaFragment#newInstance} factory method to
  * create an instance of this fragment.
  *
  */
-public class CarritoFragment extends Fragment {
+public class CuentaFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,11 +31,11 @@ public class CarritoFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CarritoFragment.
+     * @return A new instance of fragment CuentaFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CarritoFragment newInstance(String param1, String param2) {
-        CarritoFragment fragment = new CarritoFragment();
+    public static CuentaFragment newInstance(String param1, String param2) {
+        CuentaFragment fragment = new CuentaFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -41,7 +43,7 @@ public class CarritoFragment extends Fragment {
         return fragment;
     }
 
-    public CarritoFragment() {
+    public CuentaFragment() {
         // Required empty public constructor
     }
 
@@ -58,6 +60,6 @@ public class CarritoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_carrito, container, false);
+        return inflater.inflate(R.layout.fragment_cuenta, container, false);
     }
 }

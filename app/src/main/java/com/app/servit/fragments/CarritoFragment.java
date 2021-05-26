@@ -1,4 +1,4 @@
-package com.app.servit;
+package com.app.servit.fragments;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -6,13 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.app.servit.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CartaFragment#newInstance} factory method to
+ * Use the {@link CarritoFragment#newInstance} factory method to
  * create an instance of this fragment.
  *
  */
-public class CartaFragment extends Fragment {
+public class CarritoFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,11 +31,11 @@ public class CartaFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CartaFragment.
+     * @return A new instance of fragment CarritoFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CartaFragment newInstance(String param1, String param2) {
-        CartaFragment fragment = new CartaFragment();
+    public static CarritoFragment newInstance(String param1, String param2) {
+        CarritoFragment fragment = new CarritoFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -41,7 +43,7 @@ public class CartaFragment extends Fragment {
         return fragment;
     }
 
-    public CartaFragment() {
+    public CarritoFragment() {
         // Required empty public constructor
     }
 
@@ -58,6 +60,6 @@ public class CartaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_carta, container, false);
+        return inflater.inflate(R.layout.fragment_carrito, container, false);
     }
 }

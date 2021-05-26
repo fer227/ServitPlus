@@ -1,13 +1,13 @@
 package com.app.servit;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.app.servit.fragments.CarritoFragment;
+import com.app.servit.fragments.CartaFragment;
+import com.app.servit.fragments.CuentaFragment;
 
 public class PageAdapter extends FragmentStateAdapter {
 
