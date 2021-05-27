@@ -45,8 +45,6 @@ public class ListAdapterProductos extends RecyclerView.Adapter<ListAdapterProduc
         holder.recyclerView.setHasFixedSize(true);
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         holder.recyclerView.setAdapter(listAdapterIngredientes);
-        System.out.println("---------------");
-        System.out.println(datos.get(position).getIngredientes());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
