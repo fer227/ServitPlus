@@ -1,4 +1,5 @@
 const Router = require('@koa/router');
+const Carrito = require('./models/Carrito');
 const router = new Router();
 const Categoria = require("./models/Categoria");
 const Pedido = require("./models/Pedido");
@@ -33,6 +34,13 @@ router.get('/productos/:id', async (ctx) => {
     });
 });
 
+router.delete('/carrito/:id', async (ctx) => {   
+    await Carrito.findOneByIdAndDelete({producto: ctx.params.id}).then((data)=>{
+        ctx.body = {msg = "Eliminado correctamente del carrito"};
+        ctx.status = 200;
+    });
+});
+
 async function getProducto(id){
     producto = await Producto.findById(id);
     return producto
@@ -40,6 +48,20 @@ async function getProducto(id){
 
 router.get('/pedido', async (ctx) => {   
     await Pedido.find({}).then(async (data) => {
+        //hacer una copia del objeto
+        var misDatos = JSON.parse(JSON.stringify(data));
+        for(var i = 0; i < data.length; i++){
+            producto = await getProducto(data[i]['producto']);
+            misDatos[i].precio = producto.precio
+            misDatos[i].nombre = producto.nombre
+        }
+        ctx.body = misDatos
+        ctx.status = 200;
+    });
+});
+
+router.get('/carrito', async (ctx) => {   
+    await Carrito.find({}).then(async (data) => {
         //hacer una copia del objeto
         var misDatos = JSON.parse(JSON.stringify(data));
         for(var i = 0; i < data.length; i++){
@@ -76,6 +98,33 @@ router.post('/pedido', async (ctx) => {
         }
     }
     ctx.body = {msg: "Pedido recibido"};
+    ctx.status = 201;
+});
+
+router.post('/carrito', async (ctx) => {
+    body = ctx.request.body;
+
+    for(var i = 0; i < body.length; i++){
+        var actual = body[i];
+        productoYaCarrito = "";
+        await Carrito.find({producto: actual['producto']}).then((data) => {
+            productoYaCarrito = data
+        });
+    
+        if(productoYaCarrito.length == 0){
+            const nuevoElementoCarrito = new Carrito({
+                producto: actual['producto'],
+                cantidad: actual['cantidad']
+            });
+            nuevoElementoCarrito.save()
+        }
+        else{
+            cantidad = productoYaCarrito[0]['cantidad'];
+            await Carrito.findOneAndUpdate({producto: actual['producto']}, {cantidad: actual['cantidad'] + cantidad});
+            
+        }
+    }
+    ctx.body = {msg: "Carrito actualizado"};
     ctx.status = 201;
 });
 
