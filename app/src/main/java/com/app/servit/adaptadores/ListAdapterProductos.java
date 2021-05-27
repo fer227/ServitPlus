@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.servit.R;
@@ -38,7 +40,13 @@ public class ListAdapterProductos extends RecyclerView.Adapter<ListAdapterProduc
     public void onBindViewHolder(ListAdapterProductos.ViewHolder holder, int position) {
         holder.bindData(datos.get(position));
         holder.producto.setText(datos.get(position).getNombre());
+        ListAdapterIngredientes listAdapterIngredientes = new ListAdapterIngredientes(datos.get(position).getIngredientes(), context);
 
+        holder.recyclerView.setHasFixedSize(true);
+        holder.recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        holder.recyclerView.setAdapter(listAdapterIngredientes);
+        System.out.println("---------------");
+        System.out.println(datos.get(position).getIngredientes());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,10 +60,12 @@ public class ListAdapterProductos extends RecyclerView.Adapter<ListAdapterProduc
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView producto;
+        RecyclerView recyclerView;
 
         ViewHolder(View itemView){
             super(itemView);
             producto = itemView.findViewById(R.id.text_producto);
+            recyclerView = itemView.findViewById(R.id.lista_ingredientes);
         }
 
         void bindData(final Producto item){

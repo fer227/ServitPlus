@@ -14,9 +14,11 @@ import android.widget.TextView;
 
 import com.app.servit.R;
 import com.app.servit.adaptadores.ListAdapterCategorias;
+import com.app.servit.adaptadores.ListAdapterIngredientes;
 import com.app.servit.adaptadores.ListAdapterProductos;
 import com.app.servit.api.RetrofitService;
 import com.app.servit.modelos.Categoria;
+import com.app.servit.modelos.Ingrediente;
 import com.app.servit.modelos.Producto;
 import com.app.servit.utils.Utils;
 
@@ -47,8 +49,10 @@ public class CartaFragment extends Fragment {
 
     private List<Categoria> categorias = new ArrayList();
     private List<Producto> productos = new ArrayList();
+    private List<Ingrediente> ingredientes =  new ArrayList();
     static ListAdapterCategorias adapterCategorias;
     static ListAdapterProductos adapterProductos;
+    static ListAdapterIngredientes adapterIngredientes;
     private View view;
 
     /**
