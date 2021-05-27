@@ -49,13 +49,7 @@ public class ListAdapterCategorias extends RecyclerView.Adapter<ListAdapterCateg
         holder.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //System.out.println(datos.get(position).toString());
-                //Intent intent = new Intent(context, Detalle.class);
-                //intent.putExtra("id", datos.get(position).getId());
-                //context.startActivity(intent);
-                System.out.println("----------");
                 String id = datos.get(position).getId();
-                System.out.println(id);
                 fragment.getProductos(id, fragment.getView());
             }
         });

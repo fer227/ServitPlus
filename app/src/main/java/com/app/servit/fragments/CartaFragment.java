@@ -94,7 +94,6 @@ public class CartaFragment extends Fragment {
             @Override
             public void onFailure(Call<List<Categoria>> call, Throwable t) {
                 Utils.enviarToast("Error al intentar recibir la carta", getContext());
-                System.out.println(t.toString());
             }
         });
 
@@ -104,7 +103,6 @@ public class CartaFragment extends Fragment {
             public void handleOnBackPressed() {
                 view.findViewById(R.id.include_productos).setVisibility(View.GONE);
                 view.findViewById(R.id.include_categorias).setVisibility(View.VISIBLE);
-                System.out.println("HE HECHO EL ON BACK");
             }
         };
 
@@ -112,12 +110,10 @@ public class CartaFragment extends Fragment {
     }
 
     public void getProductos(String id, View v) {
-        System.out.println("--------------------");
         RetrofitService.getInstance().getProductosByCategoria(id).enqueue(new Callback<List<Producto>>() {
             @Override
             public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
                 productos.clear();
-                System.out.println(response.body());
                 productos.addAll(response.body());
                 adapterProductos.notifyDataSetChanged();
                 System.out.println(productos);
