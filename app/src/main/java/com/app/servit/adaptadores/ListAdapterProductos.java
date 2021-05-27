@@ -90,7 +90,7 @@ public class ListAdapterProductos extends RecyclerView.Adapter<ListAdapterProduc
                     @Override
                     public void onClick(View v) {
                         String cant_actual = cantidad.getText().toString();
-
+                        String id = prod.getId();
                     }
                 });
 

@@ -35,8 +35,22 @@ router.get('/productos/:id', async (ctx) => {
 });
 
 router.delete('/carrito/:id', async (ctx) => {   
-    await Carrito.findOneByIdAndDelete({producto: ctx.params.id}).then((data)=>{
-        ctx.body = {msg = "Eliminado correctamente del carrito"};
+    await Carrito.findByIdAndDelete({_id: ctx.params.id}).then((data)=>{
+        ctx.body = {msg : "Eliminado correctamente del carrito"};
+        ctx.status = 200;
+    });
+});
+
+router.delete('/carrito', async (ctx) => {   
+    await Carrito.deleteMany({}).then((data)=>{
+        ctx.body = {msg : "Carrito vaciado"};
+        ctx.status = 200;
+    });
+});
+
+router.delete('/pedido', async (ctx) => {   
+    await Pedido.deleteMany({}).then((data)=>{
+        ctx.body = {msg : "Pedido vaciado"};
         ctx.status = 200;
     });
 });
@@ -66,8 +80,8 @@ router.get('/carrito', async (ctx) => {
         var misDatos = JSON.parse(JSON.stringify(data));
         for(var i = 0; i < data.length; i++){
             producto = await getProducto(data[i]['producto']);
-            misDatos[i].precio = producto.precio
-            misDatos[i].nombre = producto.nombre
+            misDatos[i].precio = producto.precio;
+            misDatos[i].nombre = producto.nombre;
         }
         ctx.body = misDatos
         ctx.status = 200;
@@ -93,7 +107,7 @@ router.post('/pedido', async (ctx) => {
         }
         else{
             cantidad = productoYaPedido[0]['cantidad'];
-            await Pedido.findOneAndUpdate({producto: actual['producto']}, {cantidad: actual['cantidad'] + cantidad});
+            await Pedido.findOneAndUpdate({producto: actual['producto']}, {cantidad: actual['cantidad']*1 + cantidad});
             
         }
     }
@@ -120,7 +134,7 @@ router.post('/carrito', async (ctx) => {
         }
         else{
             cantidad = productoYaCarrito[0]['cantidad'];
-            await Carrito.findOneAndUpdate({producto: actual['producto']}, {cantidad: actual['cantidad'] + cantidad});
+            await Carrito.findOneAndUpdate({producto: actual['producto']}, {cantidad: actual['cantidad']*1 + cantidad});
             
         }
     }
