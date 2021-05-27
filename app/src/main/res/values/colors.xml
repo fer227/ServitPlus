@@ -20,4 +20,9 @@
 
     <color name="selected_color">#FFFFFF</color>
     <color name="unselected_color">#FF867C</color>
+
+    <color name="primaryText">#212121</color>
+    <color name="secondaryText">#757575</color>
+    <color name="divider">#ECECEC</color>
+
 </resources>
