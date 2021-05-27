@@ -55,7 +55,17 @@ public class ListAdapterProductos extends RecyclerView.Adapter<ListAdapterProduc
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
                 View bottomSheetView = LayoutInflater.from(context).inflate(R.layout.layout_bottom_sheet, v.findViewById(R.id.bottom_container));
 
+                Producto prod = datos.get(position);
+
                 TextView cantidad = bottomSheetView.findViewById(R.id.cantidad_producto);
+                TextView producto = bottomSheetView.findViewById(R.id.modal_producto);
+                TextView precio = bottomSheetView.findViewById(R.id.modal_precio);
+                TextView descripcion = bottomSheetView.findViewById(R.id.modal_descripcion);
+
+                producto.setText(prod.getNombre());
+                precio.setText(String.valueOf(prod.getPrecio() + " €"));
+                descripcion.setText(prod.getDescripcion());
+
                 bottomSheetView.findViewById(R.id.add_cantidad).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -80,7 +90,7 @@ public class ListAdapterProductos extends RecyclerView.Adapter<ListAdapterProduc
                     @Override
                     public void onClick(View v) {
                         String cant_actual = cantidad.getText().toString();
-                        
+
                     }
                 });
 
