@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/bottom_container"
+    android:backgroundTintMode="@android:color/transparent"
     android:orientation="vertical"
     android:background="@drawable/bottom_sheet_background">
 
@@ -119,5 +120,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Añadir al carrito"
+        android:textColor="@color/white"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/colorSecondary"/>
 
 </LinearLayout>

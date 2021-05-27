@@ -20,11 +20,4 @@ public class Utils {
         toast = Toast.makeText(context, msg, duration);
         toast.show();
     }
-
-    public static void enviarToastLong(String msg, Context context){
-        int duration = Toast.LENGTH_LONG;
-        Toast toast = null;
-        toast = Toast.makeText(context, msg, duration);
-        toast.show();
-    }
 }

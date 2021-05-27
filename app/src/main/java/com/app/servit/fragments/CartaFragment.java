@@ -124,7 +124,7 @@ public class CartaFragment extends Fragment {
                 productos.clear();
                 productos.addAll(response.body());
                 adapterProductos.notifyDataSetChanged();
-                Utils.enviarToastLong("Haz scrolls sobre los ingredientes para ver más", getContext());
+                Utils.enviarToast("Haz scrolls sobre los ingredientes para ver más", getContext());
                 v.findViewById(R.id.include_categorias).setVisibility(View.GONE);
                 v.findViewById(R.id.include_productos).setVisibility(View.VISIBLE);
                 //((TextView)v.findViewById(R.id.titulo_productos)).setText(categoria);

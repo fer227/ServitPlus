@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.LinearLayoutCompat;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.servit.R;
 import com.app.servit.modelos.Producto;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -45,13 +48,14 @@ public class ListAdapterProductos extends RecyclerView.Adapter<ListAdapterProduc
         holder.recyclerView.setHasFixedSize(true);
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         holder.recyclerView.setAdapter(listAdapterIngredientes);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+        holder.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //System.out.println(datos.get(position).toString());
-                //Intent intent = new Intent(context, Detalle.class);
-                //intent.putExtra("id", datos.get(position).getId());
-                //context.startActivity(intent);
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
+                View bottomSheetView = LayoutInflater.from(context).inflate(R.layout.layout_bottom_sheet, v.findViewById(R.id.bottom_container));
+                bottomSheetDialog.setContentView(bottomSheetView);
+                bottomSheetDialog.show();
             }
         });
     }
@@ -59,12 +63,14 @@ public class ListAdapterProductos extends RecyclerView.Adapter<ListAdapterProduc
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView producto;
         TextView precio;
+        FloatingActionButton fab;
         RecyclerView recyclerView;
 
         ViewHolder(View itemView){
             super(itemView);
             producto = itemView.findViewById(R.id.text_producto);
             precio = itemView.findViewById(R.id.text_precio);
+            fab = itemView.findViewById(R.id.button_menu_producto);
             recyclerView = itemView.findViewById(R.id.lista_ingredientes);
         }
 
