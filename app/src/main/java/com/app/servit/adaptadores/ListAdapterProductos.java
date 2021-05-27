@@ -54,6 +54,36 @@ public class ListAdapterProductos extends RecyclerView.Adapter<ListAdapterProduc
             public void onClick(View v) {
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
                 View bottomSheetView = LayoutInflater.from(context).inflate(R.layout.layout_bottom_sheet, v.findViewById(R.id.bottom_container));
+
+                TextView cantidad = bottomSheetView.findViewById(R.id.cantidad_producto);
+                bottomSheetView.findViewById(R.id.add_cantidad).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String cant_actual = cantidad.getText().toString();
+                        int nueva_cant = Integer.parseInt(cant_actual) + 1;
+                        cantidad.setText(Integer.toString(nueva_cant));
+                    }
+                });
+
+                bottomSheetView.findViewById(R.id.restar_cantidad).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String cant_actual = cantidad.getText().toString();
+                        int nueva_cant = Integer.parseInt(cant_actual) - 1;
+                        if(nueva_cant >= 0){
+                            cantidad.setText(Integer.toString(nueva_cant));
+                        }
+                    }
+                });
+
+                bottomSheetView.findViewById(R.id.boton_addCarrito).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String cant_actual = cantidad.getText().toString();
+                        
+                    }
+                });
+
                 bottomSheetDialog.setContentView(bottomSheetView);
                 bottomSheetDialog.show();
             }
