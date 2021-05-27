@@ -1,6 +1,8 @@
 package com.app.servit.fragments;
 
 import android.os.Bundle;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,6 +56,16 @@ public class CarritoFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        OnBackPressedCallback callback =  new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                requireActivity().finish();
+                System.out.println("HE HECHO EL ON BACK");
+            }
+        };
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(callback);
     }
 
     @Override

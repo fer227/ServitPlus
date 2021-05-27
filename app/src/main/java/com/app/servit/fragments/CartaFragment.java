@@ -48,6 +48,7 @@ public class CartaFragment extends Fragment {
     private List<Producto> productos = new ArrayList();
     static ListAdapterCategorias adapterCategorias;
     static ListAdapterProductos adapterProductos;
+    private View view;
 
     /**
      * Use this factory method to create a new instance of
@@ -97,6 +98,17 @@ public class CartaFragment extends Fragment {
             }
         });
 
+
+        OnBackPressedCallback callback =  new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                view.findViewById(R.id.include_productos).setVisibility(View.GONE);
+                view.findViewById(R.id.include_categorias).setVisibility(View.VISIBLE);
+                System.out.println("HE HECHO EL ON BACK");
+            }
+        };
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(callback);
     }
 
     public void getProductos(String id, View v) {
@@ -112,6 +124,7 @@ public class CartaFragment extends Fragment {
                 Utils.enviarToast("Productos recibidos recibidas", getContext());
                 v.findViewById(R.id.include_categorias).setVisibility(View.GONE);
                 v.findViewById(R.id.include_productos).setVisibility(View.VISIBLE);
+                view = v;
             }
 
             @Override
