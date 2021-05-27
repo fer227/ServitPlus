@@ -60,16 +60,19 @@ public class ListAdapterProductos extends RecyclerView.Adapter<ListAdapterProduc
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView producto;
+        TextView precio;
         RecyclerView recyclerView;
 
         ViewHolder(View itemView){
             super(itemView);
             producto = itemView.findViewById(R.id.text_producto);
+            precio = itemView.findViewById(R.id.text_precio);
             recyclerView = itemView.findViewById(R.id.lista_ingredientes);
         }
 
         void bindData(final Producto item){
             producto.setText(item.getNombre());
+            precio.setText(String.valueOf(item.getPrecio()) + " €");
         }
     }
 }

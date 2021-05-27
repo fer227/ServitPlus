@@ -78,6 +78,20 @@ public class CartaFragment extends Fragment {
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        OnBackPressedCallback callback =  new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                view.findViewById(R.id.include_productos).setVisibility(View.GONE);
+                view.findViewById(R.id.include_categorias).setVisibility(View.VISIBLE);
+            }
+        };
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(callback);
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -101,17 +115,6 @@ public class CartaFragment extends Fragment {
                 Utils.enviarToast("Error al intentar recibir la carta", getContext());
             }
         });
-
-
-        OnBackPressedCallback callback =  new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                view.findViewById(R.id.include_productos).setVisibility(View.GONE);
-                view.findViewById(R.id.include_categorias).setVisibility(View.VISIBLE);
-            }
-        };
-
-        requireActivity().getOnBackPressedDispatcher().addCallback(callback);
     }
 
     public void getProductos(String id, View v, String categoria) {
@@ -124,7 +127,7 @@ public class CartaFragment extends Fragment {
                 Utils.enviarToast("Productos recibidos recibidas", getContext());
                 v.findViewById(R.id.include_categorias).setVisibility(View.GONE);
                 v.findViewById(R.id.include_productos).setVisibility(View.VISIBLE);
-                ((TextView)v.findViewById(R.id.titulo_productos)).setText(categoria);
+                //((TextView)v.findViewById(R.id.titulo_productos)).setText(categoria);
                 view = v;
             }
 
