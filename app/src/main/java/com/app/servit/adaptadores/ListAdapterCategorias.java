@@ -50,7 +50,8 @@ public class ListAdapterCategorias extends RecyclerView.Adapter<ListAdapterCateg
             @Override
             public void onClick(View v) {
                 String id = datos.get(position).getId();
-                fragment.getProductos(id, fragment.getView());
+                String nombre = datos.get(position).getNombre();
+                fragment.getProductos(id, fragment.getView(), nombre);
             }
         });
     }

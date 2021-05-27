@@ -41,7 +41,7 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginBottom="10dp"
                         android:text="Producto"
-                        android:textColor="@color/colorOnSecondary"
+                        android:textColor="@color/colorSecondary"
                         android:textSize="25sp"></TextView>
 
                 </LinearLayout>

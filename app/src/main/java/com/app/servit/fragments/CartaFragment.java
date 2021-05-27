@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.app.servit.R;
 import com.app.servit.adaptadores.ListAdapterCategorias;
@@ -109,17 +110,17 @@ public class CartaFragment extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback(callback);
     }
 
-    public void getProductos(String id, View v) {
+    public void getProductos(String id, View v, String categoria) {
         RetrofitService.getInstance().getProductosByCategoria(id).enqueue(new Callback<List<Producto>>() {
             @Override
             public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
                 productos.clear();
                 productos.addAll(response.body());
                 adapterProductos.notifyDataSetChanged();
-                System.out.println(productos);
                 Utils.enviarToast("Productos recibidos recibidas", getContext());
                 v.findViewById(R.id.include_categorias).setVisibility(View.GONE);
                 v.findViewById(R.id.include_productos).setVisibility(View.VISIBLE);
+                ((TextView)v.findViewById(R.id.titulo_productos)).setText(categoria);
                 view = v;
             }
 
@@ -138,13 +139,13 @@ public class CartaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_carta, container, false);
 
         adapterCategorias = new ListAdapterCategorias(categorias, this, getContext());
-        RecyclerView recyclerView = view.findViewById(R.id.include_categorias);
+        RecyclerView recyclerView = view.findViewById(R.id.lista_categorias);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapterCategorias);
 
         adapterProductos = new ListAdapterProductos(productos, getContext());
-        RecyclerView recyclerView2 = view.findViewById(R.id.include_productos);
+        RecyclerView recyclerView2 = view.findViewById(R.id.lista_productos);
         recyclerView2.setHasFixedSize(true);
         recyclerView2.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView2.setAdapter(adapterProductos);
