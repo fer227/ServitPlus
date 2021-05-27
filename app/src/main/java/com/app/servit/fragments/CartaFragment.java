@@ -1,6 +1,8 @@
 package com.app.servit.fragments;
 
 import android.os.Bundle;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -94,9 +96,10 @@ public class CartaFragment extends Fragment {
                 System.out.println(t.toString());
             }
         });
+
     }
 
-    public void getProductos(String id) {
+    public void getProductos(String id, View v) {
         System.out.println("--------------------");
         RetrofitService.getInstance().getProductosByCategoria(id).enqueue(new Callback<List<Producto>>() {
             @Override
@@ -107,6 +110,8 @@ public class CartaFragment extends Fragment {
                 adapterProductos.notifyDataSetChanged();
                 System.out.println(productos);
                 Utils.enviarToast("Productos recibidos recibidas", getContext());
+                v.findViewById(R.id.include_categorias).setVisibility(View.GONE);
+                v.findViewById(R.id.include_productos).setVisibility(View.VISIBLE);
             }
 
             @Override

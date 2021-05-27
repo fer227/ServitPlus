@@ -56,7 +56,7 @@ public class ListAdapterCategorias extends RecyclerView.Adapter<ListAdapterCateg
                 System.out.println("----------");
                 String id = datos.get(position).getId();
                 System.out.println(id);
-                fragment.getProductos(id);
+                fragment.getProductos(id, fragment.getView());
             }
         });
     }
