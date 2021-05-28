@@ -154,7 +154,17 @@ public class CarritoFragment extends Fragment {
                         MainActivity.viewPager2.setCurrentItem(2);
                         bottomSheetDialog.hide();
 
+                        RetrofitService.getInstance().confirmarCarrito().enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                //avisar a la cuenta de actualizarse
+                            }
 
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Utils.enviarToast("No se pudo confirmar el carrito", getContext());
+                            }
+                        });
                     }
                 });
 

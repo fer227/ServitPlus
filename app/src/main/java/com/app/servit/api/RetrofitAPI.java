@@ -29,6 +29,10 @@ public interface RetrofitAPI {
     @FormUrlEncoded
     Call<Void> aniadirCarrito(@Field("producto") String producto, @Field("cantidad") String cantidad);
 
+    @POST("/pedido")
+    @FormUrlEncoded
+    Call<Void> confirmarCarrito();
+
     @DELETE("/carrito/{id}")
     Call<Void> borrarDelCarrito(@Path("id") String id);
 }
