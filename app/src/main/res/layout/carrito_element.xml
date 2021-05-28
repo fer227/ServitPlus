@@ -12,7 +12,7 @@
         android:layout_marginTop="10dp">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/nombre_producto_carrito"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
@@ -23,13 +23,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/cantidad_carrito"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="130dp"
             android:text="x6"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintStart_toEndOf="@+id/nombre_producto_carrito"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -37,12 +37,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:backgroundTint="@color/red"
+            android:id="@+id/eliminar_carrito"
             android:clickable="true"
             app:fabSize="mini"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintStart_toEndOf="@+id/cantidad_carrito"
             app:layout_constraintTop_toTopOf="parent"
             app:maxImageSize="22dp"
             app:srcCompat="@drawable/delete"
