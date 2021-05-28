@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.app.servit.MainActivity;
 import com.app.servit.R;
 import com.app.servit.adaptadores.ListAdapterCarrito;
 import com.app.servit.api.RetrofitService;
@@ -146,6 +147,14 @@ public class CarritoFragment extends Fragment {
             public void onClick(View v) {
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext());
                 View bottomSheetView = LayoutInflater.from(getContext()).inflate(R.layout.nota_pedido, v.findViewById(R.id.nota_aclarativa));
+
+                bottomSheetView.findViewById(R.id.enviar_cocina).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MainActivity.viewPager2.setCurrentItem(2);
+                        bottomSheetDialog.hide();
+                    }
+                });
 
                 bottomSheetDialog.setContentView(bottomSheetView);
                 bottomSheetDialog.show();
