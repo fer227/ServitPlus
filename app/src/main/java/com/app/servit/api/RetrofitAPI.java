@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface RetrofitAPI {
@@ -16,4 +19,8 @@ public interface RetrofitAPI {
 
     @GET("/productos/{id}")
     Call<List<Producto>> getProductosByCategoria(@Path("id") String id);
+
+    @POST("/carrito")
+    @FormUrlEncoded
+    Call<Void> aniadirCarrito(@Field("producto") String producto, @Field("cantidad") String cantidad);
 }

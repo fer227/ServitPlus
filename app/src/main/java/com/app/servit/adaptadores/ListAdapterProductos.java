@@ -12,11 +12,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.servit.R;
+import com.app.servit.api.RetrofitService;
 import com.app.servit.modelos.Producto;
+import com.app.servit.utils.Utils;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ListAdapterProductos extends RecyclerView.Adapter<ListAdapterProductos.ViewHolder> {
     private List<Producto> datos;
@@ -91,6 +97,18 @@ public class ListAdapterProductos extends RecyclerView.Adapter<ListAdapterProduc
                     public void onClick(View v) {
                         String cant_actual = cantidad.getText().toString();
                         String id = prod.getId();
+
+                        RetrofitService.getInstance().aniadirCarrito(id, cant_actual).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                //RECARGAR?
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Utils.enviarToast("No se pudo añadir al carrito", context);
+                            }
+                        });
                     }
                 });
 
