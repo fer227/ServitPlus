@@ -19,7 +19,7 @@
         android:layout_gravity="center">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lista_acuenta"
+            android:id="@+id/lista_cuenta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/grisSuave"
@@ -39,7 +39,7 @@
             android:textColor="@color/black"
             android:textSize="19sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lista_acuenta" />
+            app:layout_constraintTop_toBottomOf="@+id/lista_cuenta" />
 
         <LinearLayout
             android:id="@+id/linear_propina"
