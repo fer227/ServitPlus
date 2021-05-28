@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.app.servit.R;
@@ -17,6 +18,7 @@ import com.app.servit.adaptadores.ListAdapterCarrito;
 import com.app.servit.api.RetrofitService;
 import com.app.servit.modelos.Pedido;
 import com.app.servit.utils.Utils;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,7 @@ public class CarritoFragment extends Fragment {
     private ArrayList<Pedido> pedidos = new ArrayList();
     static ListAdapterCarrito adapterCarrito;
     View view;
+    Button confirmar_pedido;
 
     /**
      * Use this factory method to create a new instance of
@@ -135,6 +138,20 @@ public class CarritoFragment extends Fragment {
         recyclerView2.setAdapter(adapterCarrito);
 
         this.view = view;
+
+        this.confirmar_pedido = view.findViewById(R.id.confirmar_pedido);
+
+        confirmar_pedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext());
+                View bottomSheetView = LayoutInflater.from(getContext()).inflate(R.layout.nota_pedido, v.findViewById(R.id.nota_aclarativa));
+
+                bottomSheetDialog.setContentView(bottomSheetView);
+                bottomSheetDialog.show();
+            }
+        });
+
         return view;
     }
 }

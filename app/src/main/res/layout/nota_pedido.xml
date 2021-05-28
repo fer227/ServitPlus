@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/nota_aclarativa"
+    android:backgroundTintMode="@android:color/transparent"
+    android:orientation="vertical"
+    android:background="@drawable/bottom_sheet_background">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_nota_aclarativa"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="¿Desea añadir alguna nota aclarativa sobre su pedido?"
+        android:textColor="@color/colorSecondary"
+        android:textSize="18dp"
+        android:textStyle="bold"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/divider"/>
+
+    <EditText
+        android:id="@+id/edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:hint="Escribe aquí"
+        android:inputType="text|textMultiLine"
+        android:gravity="top"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/divider"/>
+
+    <Button
+        android:id="@+id/enviar_cocina"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Enviar a cocina"
+        android:textColor="@color/white"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/colorSecondary"/>
+
+</LinearLayout>
