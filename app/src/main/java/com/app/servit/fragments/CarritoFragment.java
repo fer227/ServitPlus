@@ -128,7 +128,7 @@ public class CarritoFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_carrito, container, false);
 
-        adapterCarrito = new ListAdapterCarrito(pedidos, getContext());
+        adapterCarrito = new ListAdapterCarrito(pedidos, getContext(), this);
         RecyclerView recyclerView2 = view.findViewById(R.id.lista_carrito);
         recyclerView2.setHasFixedSize(true);
         recyclerView2.setLayoutManager(new LinearLayoutManager(getContext()));

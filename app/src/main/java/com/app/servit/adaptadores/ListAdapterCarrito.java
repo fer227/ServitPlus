@@ -7,25 +7,36 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.servit.R;
+import com.app.servit.api.RetrofitService;
+import com.app.servit.fragments.CarritoFragment;
 import com.app.servit.fragments.CartaFragment;
 import com.app.servit.modelos.Categoria;
 import com.app.servit.modelos.Pedido;
 import com.app.servit.modelos.Producto;
+import com.app.servit.utils.Utils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+
+import okhttp3.internal.Util;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ListAdapterCarrito extends RecyclerView.Adapter<ListAdapterCarrito.ViewHolder>{
     private List<Pedido> datos;
     private LayoutInflater inflador;
     private Context context;
+    private CarritoFragment carrito;
 
-    public ListAdapterCarrito(List<Pedido> elementos, Context context){
+    public ListAdapterCarrito(List<Pedido> elementos, Context context, CarritoFragment carrito){
         this.inflador = LayoutInflater.from(context);
         this.context = context;
+        this.carrito = carrito;
         this.datos = elementos;
     }
 
@@ -46,7 +57,17 @@ public class ListAdapterCarrito extends RecyclerView.Adapter<ListAdapterCarrito.
         holder.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //eliminar carrito
+                RetrofitService.getInstance().borrarDelCarrito(datos.get(position).getId()).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        carrito.ControlCarrito();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Utils.enviarToast("No se pudo eliminar del carrito", context);
+                    }
+                });
             }
         });
     }

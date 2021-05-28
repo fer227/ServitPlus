@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -27,4 +28,7 @@ public interface RetrofitAPI {
     @POST("/carrito")
     @FormUrlEncoded
     Call<Void> aniadirCarrito(@Field("producto") String producto, @Field("cantidad") String cantidad);
+
+    @DELETE("/carrito/{id}")
+    Call<Void> borrarDelCarrito(@Path("id") String id);
 }
