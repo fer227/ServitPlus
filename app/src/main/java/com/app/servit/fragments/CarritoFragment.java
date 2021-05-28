@@ -4,11 +4,25 @@ import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.app.servit.R;
+import com.app.servit.adaptadores.ListAdapterCarrito;
+import com.app.servit.api.RetrofitService;
+import com.app.servit.modelos.Pedido;
+import com.app.servit.utils.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +40,10 @@ public class CarritoFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ArrayList<Pedido> pedidos = new ArrayList();
+    static ListAdapterCarrito adapterCarrito;
+    View view;
 
     /**
      * Use this factory method to create a new instance of
@@ -49,6 +67,30 @@ public class CarritoFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public void ControlCarrito(){
+        RetrofitService.getInstance().getCarrito().enqueue(new Callback<List<Pedido>>() {
+            @Override
+            public void onResponse(Call<List<Pedido>> call, Response<List<Pedido>> response) {
+                if(response.body().isEmpty()){
+                    view.findViewById(R.id.include_carrito_no_productos).setVisibility(View.VISIBLE);
+                    view.findViewById(R.id.include_carrito_productos).setVisibility(View.GONE);
+                }
+                else {
+                    pedidos.clear();
+                    pedidos.addAll(response.body());
+                    adapterCarrito.notifyDataSetChanged();
+                    view.findViewById(R.id.include_carrito_no_productos).setVisibility(View.GONE);
+                    view.findViewById(R.id.include_carrito_productos).setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Pedido>> call, Throwable t) {
+                Utils.enviarToast("No se ha podido obtener el carrito", getContext());
+            }
+        });
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,12 +98,18 @@ public class CarritoFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        this.ControlCarrito();
 
         OnBackPressedCallback callback =  new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
                 requireActivity().finish();
-                System.out.println("HE HECHO EL ON BACK");
             }
         };
 
@@ -72,6 +120,15 @@ public class CarritoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_carrito, container, false);
+        View view = inflater.inflate(R.layout.fragment_carrito, container, false);
+
+        adapterCarrito = new ListAdapterCarrito(pedidos, getContext());
+        RecyclerView recyclerView2 = view.findViewById(R.id.lista_carrito);
+        recyclerView2.setHasFixedSize(true);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView2.setAdapter(adapterCarrito);
+
+        this.view = view;
+        return view;
     }
 }

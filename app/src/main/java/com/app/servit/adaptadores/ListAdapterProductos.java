@@ -11,6 +11,7 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.app.servit.MainActivity;
 import com.app.servit.R;
 import com.app.servit.api.RetrofitService;
 import com.app.servit.modelos.Producto;
@@ -97,11 +98,14 @@ public class ListAdapterProductos extends RecyclerView.Adapter<ListAdapterProduc
                     public void onClick(View v) {
                         String cant_actual = cantidad.getText().toString();
                         String id = prod.getId();
-
+                        System.out.println("ID: " + id);
+                        System.out.println("Cantidad: " + cant_actual);
                         RetrofitService.getInstance().aniadirCarrito(id, cant_actual).enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
-                                //RECARGAR?
+                                System.out.println("me voy al carrito");
+                                MainActivity.viewPager2.setCurrentItem(1);
+                                bottomSheetDialog.hide();
                             }
 
                             @Override

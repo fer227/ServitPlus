@@ -1,6 +1,7 @@
 package com.app.servit.api;
 
 import com.app.servit.modelos.Categoria;
+import com.app.servit.modelos.Pedido;
 import com.app.servit.modelos.Producto;
 
 import java.util.List;
@@ -19,6 +20,9 @@ public interface RetrofitAPI {
 
     @GET("/productos/{id}")
     Call<List<Producto>> getProductosByCategoria(@Path("id") String id);
+
+    @GET("/carrito")
+    Call<List<Pedido>> getCarrito();
 
     @POST("/carrito")
     @FormUrlEncoded

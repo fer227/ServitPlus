@@ -52,7 +52,6 @@ public class CartaFragment extends Fragment {
     private List<Ingrediente> ingredientes =  new ArrayList();
     static ListAdapterCategorias adapterCategorias;
     static ListAdapterProductos adapterProductos;
-    static ListAdapterIngredientes adapterIngredientes;
     private View view;
 
     /**
@@ -124,7 +123,6 @@ public class CartaFragment extends Fragment {
                 productos.clear();
                 productos.addAll(response.body());
                 adapterProductos.notifyDataSetChanged();
-                Utils.enviarToast("Haz scrolls sobre los ingredientes para ver más", getContext());
                 v.findViewById(R.id.include_categorias).setVisibility(View.GONE);
                 v.findViewById(R.id.include_productos).setVisibility(View.VISIBLE);
                 //((TextView)v.findViewById(R.id.titulo_productos)).setText(categoria);

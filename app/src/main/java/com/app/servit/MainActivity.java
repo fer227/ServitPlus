@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
-    ViewPager2 viewPager2;
+    public static ViewPager2 viewPager2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

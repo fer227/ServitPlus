@@ -13,9 +13,9 @@
 
         <TextView
             android:id="@+id/nombre_producto_carrito"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="30dp"
             android:text="Un producto (7€)"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -26,7 +26,7 @@
             android:id="@+id/cantidad_carrito"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="130dp"
+            android:layout_marginStart="70dp"
             android:text="x6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/nombre_producto_carrito"
