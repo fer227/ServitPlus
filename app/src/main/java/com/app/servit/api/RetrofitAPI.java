@@ -25,6 +25,9 @@ public interface RetrofitAPI {
     @GET("/carrito")
     Call<List<Pedido>> getCarrito();
 
+    @GET("/pedido")
+    Call<List<Pedido>> getCuenta();
+
     @POST("/carrito")
     @FormUrlEncoded
     Call<Void> aniadirCarrito(@Field("producto") String producto, @Field("cantidad") String cantidad);

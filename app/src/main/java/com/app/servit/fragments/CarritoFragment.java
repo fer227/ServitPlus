@@ -140,6 +140,8 @@ public class CarritoFragment extends Fragment {
 
         this.view = view;
 
+        ControlCarrito();
+
         this.confirmar_pedido = view.findViewById(R.id.confirmar_pedido);
 
         confirmar_pedido.setOnClickListener(new View.OnClickListener() {

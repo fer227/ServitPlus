@@ -4,13 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="375dp"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
-        android:text="Resumen de la cuenta:"
+        android:text="@string/resumen"
+        android:textColor="@color/black"
         android:textAlignment="center"
+        android:background="@color/grisSuave"
         android:textSize="19sp"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +24,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/lista_cuenta"
-            android:layout_width="wrap_content"
+            android:layout_width="375dp"
             android:layout_height="wrap_content"
             android:background="@color/grisSuave"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +41,7 @@
             android:text="Precio total: "
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="19sp"
+            android:textSize="22sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lista_cuenta" />
 
@@ -45,7 +49,7 @@
             android:id="@+id/linear_propina"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/precio_cuenta"
             tools:layout_editor_absoluteX="0dp">

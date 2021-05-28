@@ -1,12 +1,30 @@
 package com.app.servit.fragments;
 
 import android.os.Bundle;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.app.servit.R;
+import com.app.servit.adaptadores.ListAdapterCarrito;
+import com.app.servit.adaptadores.ListAdapterCuenta;
+import com.app.servit.api.RetrofitService;
+import com.app.servit.modelos.Pedido;
+import com.app.servit.utils.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +42,10 @@ public class CuentaFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ArrayList<Pedido> pedidos = new ArrayList();
+    static ListAdapterCuenta adapterCuenta;
+    View view;
 
     /**
      * Use this factory method to create a new instance of
@@ -56,10 +78,63 @@ public class CuentaFragment extends Fragment {
         }
     }
 
+    public void ControlCuenta(){
+        RetrofitService.getInstance().getCuenta().enqueue(new Callback<List<Pedido>>() {
+            @Override
+            public void onResponse(Call<List<Pedido>> call, Response<List<Pedido>> response) {
+                if(response.body().isEmpty()){
+                    view.findViewById(R.id.include_cuenta_no_productos).setVisibility(View.VISIBLE);
+                    view.findViewById(R.id.include_cuenta_productos).setVisibility(View.GONE);
+                }
+                else{
+                    pedidos.clear();
+                    pedidos.addAll(response.body());
+                    float precio_total = 0;
+                    for(Pedido p: pedidos){
+                        precio_total += p.getPrecio() * p.getCantidad();
+                    }
+                    ((TextView)view.findViewById(R.id.precio_cuenta)).setText("Precio total: " + precio_total + "€");
+                    adapterCuenta.notifyDataSetChanged();
+                    view.findViewById(R.id.include_cuenta_no_productos).setVisibility(View.GONE);
+                    view.findViewById(R.id.include_cuenta_productos).setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Pedido>> call, Throwable t) {
+                Utils.enviarToast("No se pudo traer la cuenta", getContext());
+            }
+        });
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        this.ControlCuenta();
+
+        OnBackPressedCallback callback =  new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                requireActivity().finish();
+            }
+        };
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(callback);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cuenta, container, false);
+        this.view = inflater.inflate(R.layout.fragment_cuenta, container, false);
+
+        adapterCuenta = new ListAdapterCuenta(pedidos, getContext());
+        RecyclerView recyclerView2 = view.findViewById(R.id.lista_cuenta);
+        recyclerView2.setHasFixedSize(true);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView2.setAdapter(adapterCuenta);
+
+        return this.view;
     }
 }
