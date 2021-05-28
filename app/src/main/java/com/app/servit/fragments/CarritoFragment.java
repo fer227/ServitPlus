@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.app.servit.R;
 import com.app.servit.adaptadores.ListAdapterCarrito;
@@ -78,6 +79,11 @@ public class CarritoFragment extends Fragment {
                 else {
                     pedidos.clear();
                     pedidos.addAll(response.body());
+                    float precio_total = 0;
+                    for(Pedido p: pedidos){
+                        precio_total += p.getPrecio() * p.getCantidad();
+                    }
+                    ((TextView)view.findViewById(R.id.precio_carrito)).setText("Precio total del pedido: " + precio_total + "€");
                     adapterCarrito.notifyDataSetChanged();
                     view.findViewById(R.id.include_carrito_no_productos).setVisibility(View.GONE);
                     view.findViewById(R.id.include_carrito_productos).setVisibility(View.VISIBLE);
