@@ -153,6 +153,8 @@ public class CarritoFragment extends Fragment {
                     public void onClick(View v) {
                         MainActivity.viewPager2.setCurrentItem(2);
                         bottomSheetDialog.hide();
+
+
                     }
                 });
 

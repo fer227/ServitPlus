@@ -89,28 +89,29 @@ router.get('/carrito', async (ctx) => {
 });
 
 router.post('/pedido', async (ctx) => {
-    body = ctx.request.body;
+    await Carrito.find({}).then(async (data) => {
+        for(var i = 0; i < data.length; i++){
+            actual = data[i];
 
-    for(var i = 0; i < body.length; i++){
-        var actual = body[i];
-        productoYaPedido = "";
-        await Pedido.find({producto: actual['producto']}).then((data) => {
-            productoYaPedido = data
-        });
-    
-        if(productoYaPedido.length == 0){
-            const nuevoPedido = new Pedido({
-                producto: actual['producto'],
-                cantidad: actual['cantidad']
+            productoYaPedido = "";
+            await Pedido.find({producto: actual.producto}).then((data) => {
+                productoYaPedido = data
             });
-            nuevoPedido.save()
+
+            if(productoYaPedido.length == 0){
+                const nuevoPedido = new Pedido({
+                    producto: actual['producto'],
+                    cantidad: actual['cantidad']
+                });
+                nuevoPedido.save()
+            }
+            else{
+                cantidad = productoYaPedido[0]['cantidad'];
+                await Pedido.findOneAndUpdate({producto: actual['producto']}, {cantidad: actual['cantidad']*1 + cantidad});
+            }
         }
-        else{
-            cantidad = productoYaPedido[0]['cantidad'];
-            await Pedido.findOneAndUpdate({producto: actual['producto']}, {cantidad: actual['cantidad']*1 + cantidad});
-            
-        }
-    }
+    });
+
     ctx.body = {msg: "Pedido recibido"};
     ctx.status = 201;
 });
@@ -123,7 +124,7 @@ router.post('/carrito', async (ctx) => {
     });
 
     if(productoYaCarrito.length == 0){
-        const nuevoElementoCarrito = new Carrito({
+        nuevoElementoCarrito = new Carrito({
             producto: actual['producto'],
             cantidad: actual['cantidad']
         });
