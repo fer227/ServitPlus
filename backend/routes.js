@@ -116,28 +116,25 @@ router.post('/pedido', async (ctx) => {
 });
 
 router.post('/carrito', async (ctx) => {
-    body = ctx.request.body;
+    var actual = ctx.request.body;
+    productoYaCarrito = "";
+    await Carrito.find({producto: actual['producto']}).then((data) => {
+        productoYaCarrito = data
+    });
 
-    for(var i = 0; i < body.length; i++){
-        var actual = body[i];
-        productoYaCarrito = "";
-        await Carrito.find({producto: actual['producto']}).then((data) => {
-            productoYaCarrito = data
+    if(productoYaCarrito.length == 0){
+        const nuevoElementoCarrito = new Carrito({
+            producto: actual['producto'],
+            cantidad: actual['cantidad']
         });
-    
-        if(productoYaCarrito.length == 0){
-            const nuevoElementoCarrito = new Carrito({
-                producto: actual['producto'],
-                cantidad: actual['cantidad']
-            });
-            nuevoElementoCarrito.save()
-        }
-        else{
-            cantidad = productoYaCarrito[0]['cantidad'];
-            await Carrito.findOneAndUpdate({producto: actual['producto']}, {cantidad: actual['cantidad']*1 + cantidad});
-            
-        }
+        nuevoElementoCarrito.save()
     }
+    else{
+        cantidad = productoYaCarrito[0]['cantidad'];
+        await Carrito.findOneAndUpdate({producto: actual['producto']}, {cantidad: actual['cantidad']*1 + cantidad});
+        
+    }
+
     ctx.body = {msg: "Carrito actualizado"};
     ctx.status = 201;
 });

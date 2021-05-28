@@ -28,10 +28,11 @@
 
     <EditText
         android:id="@+id/edit_text"
-        android:layout_width="match_parent"
+        android:layout_width="375dp"
         android:layout_height="150dp"
         android:hint="Escribe aquí"
         android:inputType="text|textMultiLine"
+        android:layout_gravity="center"
         android:gravity="top"/>
 
     <View
