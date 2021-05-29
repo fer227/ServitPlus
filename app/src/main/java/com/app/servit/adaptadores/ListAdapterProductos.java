@@ -52,10 +52,6 @@ public class ListAdapterProductos extends RecyclerView.Adapter<ListAdapterProduc
         holder.producto.setText(datos.get(position).getNombre());
         ListAdapterIngredientes listAdapterIngredientes = new ListAdapterIngredientes(datos.get(position).getIngredientes(), context);
 
-        holder.recyclerView.setHasFixedSize(true);
-        holder.recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
-        holder.recyclerView.setAdapter(listAdapterIngredientes);
-
         holder.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +64,11 @@ public class ListAdapterProductos extends RecyclerView.Adapter<ListAdapterProduc
                 TextView producto = bottomSheetView.findViewById(R.id.modal_producto);
                 TextView precio = bottomSheetView.findViewById(R.id.modal_precio);
                 TextView descripcion = bottomSheetView.findViewById(R.id.modal_descripcion);
+                RecyclerView ingredientes = bottomSheetView.findViewById(R.id.lista_ingredientes_producto);
+
+                ingredientes.setHasFixedSize(true);
+                ingredientes.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+                ingredientes.setAdapter(listAdapterIngredientes);
 
                 producto.setText(prod.getNombre());
                 precio.setText(String.valueOf(prod.getPrecio() + " €"));
@@ -125,14 +126,12 @@ public class ListAdapterProductos extends RecyclerView.Adapter<ListAdapterProduc
         TextView producto;
         TextView precio;
         FloatingActionButton fab;
-        RecyclerView recyclerView;
 
         ViewHolder(View itemView){
             super(itemView);
             producto = itemView.findViewById(R.id.text_producto);
             precio = itemView.findViewById(R.id.text_precio);
             fab = itemView.findViewById(R.id.button_menu_producto);
-            recyclerView = itemView.findViewById(R.id.lista_ingredientes);
         }
 
         void bindData(final Producto item){
