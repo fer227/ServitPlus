@@ -78,7 +78,7 @@
                     android:clickable="true"
                     app:fabSize="mini"
                     app:maxImageSize="22dp"
-                    app:srcCompat="@drawable/carrito_add"
+                    app:srcCompat="@drawable/info"
                     app:tint="@color/white" />
 
             </RelativeLayout>
