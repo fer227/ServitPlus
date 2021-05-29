@@ -27,7 +27,7 @@
                 android:padding="6dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="4dp"
@@ -36,7 +36,7 @@
 
                     <TextView
                         android:id="@+id/text_producto"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Producto"
                         android:textColor="@color/colorSecondary"
@@ -54,15 +54,14 @@
                         app:layout_constraintTop_toBottomOf="@+id/text_producto"></TextView>
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/lista_ingredientes"
+                        android:id="@+id/lista_alergias"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:scrollbars="horizontal"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/text_precio">
-
-                    </androidx.recyclerview.widget.RecyclerView>
+                        android:layout_marginTop="6dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.101"
+                        app:layout_constraintStart_toEndOf="@+id/text_producto"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

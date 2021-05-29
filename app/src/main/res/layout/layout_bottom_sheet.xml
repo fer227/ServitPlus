@@ -7,6 +7,7 @@
     android:id="@+id/bottom_container"
     android:backgroundTintMode="@android:color/transparent"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     android:background="@drawable/bottom_sheet_background">
 
     <TextView
@@ -70,7 +71,7 @@
         android:background="@color/divider"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lista_ingredientes_producto"/>
 

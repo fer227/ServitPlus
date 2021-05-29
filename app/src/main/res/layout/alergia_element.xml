@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:layout_width="17.5dp"
+        android:id="@+id/image_alergia"
+        android:layout_height="17.5dp"
+        android:layout_margin="3dp"
+        android:background="@drawable/a1"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

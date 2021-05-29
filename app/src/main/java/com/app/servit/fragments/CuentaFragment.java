@@ -94,6 +94,7 @@ public class CuentaFragment extends Fragment {
                 if(response.body().isEmpty()){
                     view.findViewById(R.id.include_cuenta_no_productos).setVisibility(View.VISIBLE);
                     view.findViewById(R.id.include_cuenta_productos).setVisibility(View.GONE);
+                    ((TextView)view.findViewById(R.id.carrito_vacio)).setText("¡Cuenta vacía!");
                 }
                 else{
                     pedidos.clear();

@@ -50,7 +50,13 @@ public class ListAdapterProductos extends RecyclerView.Adapter<ListAdapterProduc
     public void onBindViewHolder(ListAdapterProductos.ViewHolder holder, int position) {
         holder.bindData(datos.get(position));
         holder.producto.setText(datos.get(position).getNombre());
+
         ListAdapterIngredientes listAdapterIngredientes = new ListAdapterIngredientes(datos.get(position).getIngredientes(), context);
+
+        ListAdapterAlergias listAdapterAlergias = new ListAdapterAlergias(datos.get(position).getAlergias(), context);
+        holder.alergias.setHasFixedSize(true);
+        holder.alergias.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        holder.alergias.setAdapter(listAdapterAlergias);
 
         holder.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,12 +132,14 @@ public class ListAdapterProductos extends RecyclerView.Adapter<ListAdapterProduc
         TextView producto;
         TextView precio;
         FloatingActionButton fab;
+        RecyclerView alergias;
 
         ViewHolder(View itemView){
             super(itemView);
             producto = itemView.findViewById(R.id.text_producto);
             precio = itemView.findViewById(R.id.text_precio);
             fab = itemView.findViewById(R.id.button_menu_producto);
+            alergias = itemView.findViewById(R.id.lista_alergias);
         }
 
         void bindData(final Producto item){
