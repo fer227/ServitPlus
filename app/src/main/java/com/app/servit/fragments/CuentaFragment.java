@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.app.servit.R;
@@ -76,6 +79,8 @@ public class CuentaFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        ControlCuenta();
     }
 
     public void ControlCuenta(){
@@ -128,6 +133,19 @@ public class CuentaFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         this.view = inflater.inflate(R.layout.fragment_cuenta, container, false);
+
+        Switch sw = view.findViewById(R.id.switch_propina);
+        EditText tx = view.findViewById(R.id.edit_propina);
+
+        sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    tx.setVisibility(View.VISIBLE);
+                else
+                    tx.setVisibility(View.GONE);
+            }
+        });
 
         adapterCuenta = new ListAdapterCuenta(pedidos, getContext());
         RecyclerView recyclerView2 = view.findViewById(R.id.lista_cuenta);

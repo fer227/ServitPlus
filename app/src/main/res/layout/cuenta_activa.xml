@@ -71,6 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
+                    android:id="@+id/switch_propina"
                     android:theme="@style/SCBSwitch"
                     android:layout_marginTop="5dp"/>
 
@@ -80,13 +81,15 @@
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
                 android:layout_width="wrap_content"
+                android:id="@+id/edit_propina"
+                android:visibility="invisible"
                 android:hint="Propina"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
         <Button
-            android:id="@+id/confirmar_pedido"
+            android:id="@+id/solicitar_cuenta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

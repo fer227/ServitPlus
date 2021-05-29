@@ -24,6 +24,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -108,6 +109,7 @@ public class CarritoFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        ControlCarrito();
     }
 
     @Override
@@ -140,8 +142,6 @@ public class CarritoFragment extends Fragment {
 
         this.view = view;
 
-        ControlCarrito();
-
         this.confirmar_pedido = view.findViewById(R.id.confirmar_pedido);
 
         confirmar_pedido.setOnClickListener(new View.OnClickListener() {
@@ -159,7 +159,17 @@ public class CarritoFragment extends Fragment {
                         RetrofitService.getInstance().confirmarCarrito().enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
-                                //avisar a la cuenta de actualizarse
+                                RetrofitService.getInstance().vaciarCarrito().enqueue(new Callback<Void>() {
+                                    @Override
+                                    public void onResponse(Call<Void> call, Response<Void> response) {
+                                        //ok
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Void> call, Throwable t) {
+                                        Utils.enviarToast("No se pudo vaciar el carrito", getContext());
+                                    }
+                                });
                             }
 
                             @Override
