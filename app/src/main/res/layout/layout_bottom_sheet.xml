@@ -125,10 +125,12 @@
 
     <Button
         android:id="@+id/boton_addCarrito"
-        android:layout_width="200dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Añadir al carrito"
+        android:drawableLeft="@drawable/carrito"
+        android:drawableTint="@color/white"
         android:textColor="@color/white"
         android:layout_marginBottom="10dp"
         android:backgroundTint="@color/colorSecondary"/>

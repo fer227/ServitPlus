@@ -95,6 +95,7 @@
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/colorSecondary"
             android:drawableTint="@color/white"
+            android:drawableLeft="@drawable/hand"
             android:padding="10dp"
             android:text="Solicitar cuenta"
             android:textColor="@color/white"
