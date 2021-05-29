@@ -35,8 +35,10 @@ public interface RetrofitAPI {
     @DELETE("/carrito")
     Call<Void> vaciarCarrito();
 
+    @DELETE("/pedido")
+    Call<Void> vaciarPedidos();
+
     @POST("/pedido")
-    @FormUrlEncoded
     Call<Void> confirmarCarrito();
 
     @DELETE("/carrito/{id}")

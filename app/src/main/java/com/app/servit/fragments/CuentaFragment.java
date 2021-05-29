@@ -1,5 +1,6 @@
 package com.app.servit.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -10,11 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.app.servit.Agradecimiento;
+import com.app.servit.MainActivity;
 import com.app.servit.R;
 import com.app.servit.adaptadores.ListAdapterCarrito;
 import com.app.servit.adaptadores.ListAdapterCuenta;
@@ -136,6 +140,7 @@ public class CuentaFragment extends Fragment {
 
         Switch sw = view.findViewById(R.id.switch_propina);
         EditText tx = view.findViewById(R.id.edit_propina);
+        Button solicitar_cuenta = view.findViewById(R.id.solicitar_cuenta);
 
         sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -144,6 +149,13 @@ public class CuentaFragment extends Fragment {
                     tx.setVisibility(View.VISIBLE);
                 else
                     tx.setVisibility(View.GONE);
+            }
+        });
+
+        solicitar_cuenta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), Agradecimiento.class));
             }
         });
 

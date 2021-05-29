@@ -44,12 +44,14 @@
 
     <Button
         android:id="@+id/enviar_cocina"
-        android:layout_width="200dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Enviar a cocina"
         android:textColor="@color/white"
         android:layout_marginBottom="10dp"
+        android:drawableLeft="@drawable/cocina"
+        android:drawableTint="@color/white"
         android:backgroundTint="@color/colorSecondary"/>
 
 </LinearLayout>

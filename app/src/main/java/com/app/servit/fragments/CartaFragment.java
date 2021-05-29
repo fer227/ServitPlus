@@ -106,7 +106,6 @@ public class CartaFragment extends Fragment {
 
                 categorias.addAll(response.body());
                 adapterCategorias.notifyDataSetChanged();
-                Utils.enviarToast("Categorías recibidas", getContext());
             }
 
             @Override
