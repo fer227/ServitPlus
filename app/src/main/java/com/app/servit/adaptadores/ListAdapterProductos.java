@@ -110,7 +110,6 @@ public class ListAdapterProductos extends RecyclerView.Adapter<ListAdapterProduc
                         RetrofitService.getInstance().aniadirCarrito(id, cant_actual).enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
-                                MainActivity.viewPager2.setCurrentItem(1);
                                 bottomSheetDialog.hide();
                             }
 
