@@ -82,8 +82,13 @@ public class CartaFragment extends Fragment {
         OnBackPressedCallback callback =  new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                view.findViewById(R.id.include_productos).setVisibility(View.GONE);
-                view.findViewById(R.id.include_categorias).setVisibility(View.VISIBLE);
+                if(view == null){
+                    getActivity().finish();
+                }
+                else if(view.findViewById(R.id.include_categorias).getVisibility() == View.GONE){
+                    view.findViewById(R.id.include_productos).setVisibility(View.GONE);
+                    view.findViewById(R.id.include_categorias).setVisibility(View.VISIBLE);
+                }
             }
         };
 
@@ -97,6 +102,7 @@ public class CartaFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
 
 
         RetrofitService.getInstance().getCategorias().enqueue(new Callback<List<Categoria>>() {
@@ -153,6 +159,14 @@ public class CartaFragment extends Fragment {
         recyclerView2.setHasFixedSize(true);
         recyclerView2.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView2.setAdapter(adapterProductos);
+
+        view.findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                view.findViewById(R.id.include_categorias).setVisibility(View.VISIBLE);
+                view.findViewById(R.id.include_productos).setVisibility(View.GONE);
+            }
+        });
 
         return view;
     }
